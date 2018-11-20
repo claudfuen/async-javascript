@@ -24,5 +24,19 @@ fn();
 //  var answer = sendMessage("Are you sure?", confirm); 
 
 
+let btn = document.getElementById("btn");
+let img = document.getElementById("photo");
 
-var 
+btn.addEventListener('click', function() {
+    var XHR = new XMLHttpRequest();
+
+
+    XHR.onreadystatechange = function(){
+        if(XHR.readyState == 4 && XHR.status == 200){
+            img.setAttribute("src", JSON.parse(XHR.responseText).message);
+        }
+    }
+
+    XHR.open("GET", "https://dog.ceo/api/breeds/image/random");
+    XHR.send();
+});
